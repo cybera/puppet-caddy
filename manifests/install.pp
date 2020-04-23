@@ -46,7 +46,6 @@ class caddy::install {
 		extract_path => "/usr/local/bin",
 		creates      => "/usr/local/bin/caddy",
 		cleanup 		 => true,
-		require      => File["/usr/local/bin/caddy"]
 	}
 
 	file { "/usr/local/bin/caddy":

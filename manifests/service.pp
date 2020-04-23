@@ -3,7 +3,7 @@ class caddy::service {
   # Only supports systemd
   # Use systemd...
   systemd::unit_file { 'caddy.service':
-    content => template('caddy.service.erb'),
+    content => template('caddy/caddy.service.erb'),
     notify => Service['caddy'],
   }
 
