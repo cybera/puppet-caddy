@@ -1,0 +1,8 @@
+#<%= @title %>
+
+:<%= @external_port %> {
+  tls self_signed
+  bind ::
+  proxy / 127.0.0.1:<%= @local_port %>
+}
+
