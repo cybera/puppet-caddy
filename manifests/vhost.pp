@@ -1,6 +1,6 @@
 define caddy::vhost (
   $external_port = 9100,
-  $internal_port = 9101,
+  $local_port = 9101,
 ) {
   include ::caddy
 
@@ -8,7 +8,6 @@ define caddy::vhost (
     ensure => file,
     content => template('caddy/reverse_proxy.erb'),
     mode => '0444',
-    require => Class['caddy'],
-  } -> Service['caddy'],
+  } ~> Service['caddy']
 
 }
