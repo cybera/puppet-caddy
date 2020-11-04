@@ -22,6 +22,11 @@ class caddy::install {
     require => User[$caddy::caddy_user],
   }
 
+  file { '/etc/caddy/':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+  } ->
   file { '/etc/caddy/config':
     ensure => directory,
     owner  => 'root',
@@ -39,20 +44,21 @@ class caddy::install {
   include archive
 
   # Hard coded Latest and amd64
-  archive { "/tmp/caddy-${version}":
+  archive { "/usr/local/bin/caddy":
     ensure       => present,
-    source       => "https://caddyserver.com/download/linux/amd64?license=personal&telemetry=off",
-    extract      => true,
+    # VERSION 1 IS NO LONGER AVAILABLE. HACK UNTIL WE CAN UPDATE THIS TO SUPPORT V2
+    source       => "https://swift-yyc.cloud.cybera.ca:8080/v1/AUTH_26e8c07d5d384c0a8656b0b6d5feea69/public/caddy",
+    extract      => false,
     extract_path => "/usr/local/bin",
     creates      => "/usr/local/bin/caddy",
-    cleanup      => true,
+    cleanup      => false,
   }
 
   file { "/usr/local/bin/caddy":
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    require => Archive["/tmp/caddy-${version}"],
+    require => Archive["/usr/local/bin/caddy"],
   }
 
 }
