@@ -7,7 +7,6 @@ class caddy (
 
   # vhosts are defined in Hiera
   if $reverse_proxies {
-    notify { 'test': }
     create_resources(caddy::vhost, $reverse_proxies)
   }
 

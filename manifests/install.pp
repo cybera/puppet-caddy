@@ -2,13 +2,15 @@ class caddy::install {
 
   group { $caddy::caddy_group:
     ensure => present,
+    gid    => $caddy::caddy_gid,
     system => true,
   }
 
   user { $caddy::caddy_user:
     ensure     => present,
     shell      => '/usr/sbin/nologin',
-    gid        => $caddy::caddy_group,
+    gid        => $caddy::caddy_gid,
+    uid        => $caddy::caddy_uid,
     system     => true,
     home       => $caddy::caddy_home,
     managehome => true,
